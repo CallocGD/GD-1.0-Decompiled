@@ -22,6 +22,8 @@ so that the broma paser doesn't crash. Our only task as of right now is return t
 Everything else can be ignored unless you believe that it's nessesary or needed.
 
 
-## Items Currently used
-    -  [modified version of generate.mjs seen in the geode-sdk bindings](https://gist.github.com/CallocGD/0c52f8fdc59dbf59d0ef731ee07f8a50)
-    
+## Items Currently being used
+
+- a pythonic version of [generate.mjs](https://gist.github.com/CallocGD/0c52f8fdc59dbf59d0ef731ee07f8a50) modifed for taking one symbols file rather than multiple.
+- [ghidra 11.2.1](https://github.com/NationalSecurityAgency/ghidra) to find the class members.
+
