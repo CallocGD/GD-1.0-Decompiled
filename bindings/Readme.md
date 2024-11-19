@@ -20,3 +20,8 @@ As long as Robtop's Added Class objects are 1:1 I do not care about how the inte
 part It can be simply ignored. However we may need to write in some libcocos stuff as is in ghidra to our 1.0 bindings just incase 
 so that the broma paser doesn't crash. Our only task as of right now is return types, parameter names and class members. 
 Everything else can be ignored unless you believe that it's nessesary or needed.
+
+
+## Items Currently used
+    -  [modified version of generate.mjs seen in the geode-sdk bindings](https://gist.github.com/CallocGD/0c52f8fdc59dbf59d0ef731ee07f8a50)
+    
