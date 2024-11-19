@@ -23,132 +23,207 @@ class FontObject {
 
 }
 
+// Class Memebers 100% Complete for GameObject except for one named m_unkPos 
+
 [[link(android)]]
-class GameObject {
+class GameObject : cocos2d::CCSprite {
     // GameObject();
     virtual ~GameObject();
  
-    GameObject* create(char const*);
+    GameObject* create(char const* frame);
  
-    TodoReturn addGlow();
-    TodoReturn createAndAddParticle(char const*, int);
-    TodoReturn createObject(char const*);
-    TodoReturn customScaleMod(char const*);
-    TodoReturn customSetup();
-    TodoReturn frameToKey(char const*);
-    TodoReturn getBallFrame(int);
-    TodoReturn getBlendAdditive();
-    TodoReturn getDontTransform();
-    TodoReturn getEnterEffect();
-    TodoReturn getFrame();
-    TodoReturn getHasBeenActivated();
-    TodoReturn getIsDisabled();
-    TodoReturn getIsInvisible();
-    TodoReturn getM_ID();
-    TodoReturn getObjectKey();
-    TodoReturn getObjectParent();
-    TodoReturn getObjectZ();
-    TodoReturn getScaleModX();
-    TodoReturn getScaleModY();
-    TodoReturn getSectionIdx();
-    TodoReturn getShouldHide();
-    TodoReturn getShouldSpawn();
-    TodoReturn getSpawnXPos();
-    TodoReturn getStartPos();
-    TodoReturn getStartRotation();
-    TodoReturn getStartScaleX();
-    TodoReturn getStartScaleY();
-    TodoReturn getStateVar();
-    TodoReturn getTintColor();
-    TodoReturn getTintDuration();
-    TodoReturn getType();
-    TodoReturn getUsePlayerColor();
-    bool init(char const*);
-    TodoReturn keyToFrame(char const*);
-    TodoReturn objectFromString(gd::string);
-    TodoReturn removeGlow();
-    void setObjectColor(cocos2d::ccColor3B);
-    TodoReturn setupTypeFromFrame(char const*);
-    TodoReturn stringSetupToDict(gd::string);
+    void addGlow();
+    cocos2d::CCParticleSystemQuad* createAndAddParticle(char const* frame, int maybeParticleID);
+    
+    // Unknown Return Type For now, Ghidra did not decompile this function I wanted correctly... 
+    TodoReturn createObject(char const* frame);
+
+    // Same Problem, Ghidra did not decompile this function I wanted correctly... 
+    TodoReturn customScaleMod(char const* unkStr);
+    void customSetup();
+
+    // Same Problem no need to explain futher 
+    TodoReturn frameToKey(char const* frame);
+    
+    char* getBallFrame(int ID);
+    bool getBlendAdditive();
+    bool getDontTransform();
+    int getEnterEffect();
+    gd::string getFrame();
+    bool getHasBeenActivated();
+    bool getIsDisabled();
+    bool getIsInvisible();
+    int getM_ID();
+    int getObjectKey();
+    
+   
+    cocos2d::CCNode* getObjectParent();
+
+    int getObjectZ();
+    float getScaleModX();
+    float getScaleModY();
+    int getSectionIdx();
+    bool getShouldHide();
+    bool getShouldSpawn();
+    float getSpawnXPos();
+    cocos2d::CCPoint getStartPos();
+    float getStartRotation();
+    float getStartScaleX();
+    float getStartScaleY();
+    bool getStateVar();
+    cocos2d::ccColor3B getTintColor();
+    float getTintDuration();
+    int getType();
+    bool getUsePlayerColor();
+    bool init(char const* frame);
+    char* keyToFrame(char const* key);
+
+    // Same Problem as described. Ghidra cuts out too early. 
+    // However anyone with a brain should be able to identify 
+    // this one pretty quickly.
+    static GameObject* objectFromString(gd::string str);
+
+    void removeGlow();
+    void setObjectColor(cocos2d::ccColor3B objectColor);
+    
+    // function cuts on ghidra where it shouldn't , so I can't find the returnType at the moment...
+
+    TodoReturn setupTypeFromFrame(char const* frame);
+
+    cocos2d::CCDictionary* stringSetupToDict(gd::string);
     TodoReturn updateState();
  
     virtual TodoReturn update(float);
  
     virtual void setRotation(float);
  
-    virtual void setScaleX(float);
+    virtual void setScaleX(float scaleX);
  
-    virtual void setScaleY(float);
+    virtual void setScaleY(float scaleY);
  
-    virtual void setPosition(cocos2d::CCPoint const&);
+    virtual void setPosition(cocos2d::CCPoint const& pos);
  
-    virtual void setVisible(bool);
+    virtual void setVisible(bool visible);
  
-    virtual void setOpacity(unsigned char);
+    virtual void setOpacity(unsigned char opacity);
  
-    virtual void setScale(float);
+    virtual void setScale(float scale);
  
-    virtual TodoReturn resetObject();
+    virtual void resetObject();
  
     virtual TodoReturn triggerObject();
  
-    virtual TodoReturn activateObject();
+    virtual void activateObject();
  
-    virtual TodoReturn deactivateObject();
+    virtual void deactivateObject();
  
-    virtual TodoReturn getObjectRect();
+    virtual cocos2d::CCRect getObjectRect();
  
-    virtual TodoReturn getObjectRect(float, float);
+    virtual cocos2d::CCRect getObjectRect(float, float);
  
-    virtual TodoReturn getRealPosition();
+    virtual cocos2d::CCPoint getRealPosition();
  
-    virtual void setStartPos(cocos2d::CCPoint);
+    virtual void setStartPos(cocos2d::CCPoint startPos);
+    
+    // Maybe gd::string , on ghidra it cuts at 001c9e62 when it should really end at 001ca3b4
+    virtual gd::string getSaveString();
  
-    virtual TodoReturn getSaveString();
+    virtual void setFlipX(bool flipX);
  
-    virtual void setFlipX(bool);
+    virtual void setFlipY(bool flipY);
  
-    virtual void setFlipY(bool);
- 
-    virtual TodoReturn calculateSpawnXPos();
+    virtual void calculateSpawnXPos();
  
     virtual TodoReturn triggerActivated();
+    
+    // These two powerOnObject/powerOffObject have to do with the game's Yellow Orbs as apart of RingObject
+
+    virtual void powerOnObject();
  
-    virtual TodoReturn powerOnObject();
+    virtual void powerOffObject();
  
-    virtual TodoReturn powerOffObject();
+    virtual void setScaleModX(float scaleModX);
  
-    virtual void setScaleModX(float);
+    virtual void setScaleModY(float scaleModY);
  
-    virtual void setScaleModY(float);
+    virtual void setM_ID(int M_ID);
  
-    virtual void setM_ID(int);
+    virtual void setSectionIdx(int sectionIdx);
  
-    virtual void setSectionIdx(int);
+    virtual void setStartRotation(float startRotation);
  
-    virtual void setStartRotation(float);
+    virtual void setStartScaleX(float stateScaleX);
  
-    virtual void setStartScaleX(float);
+    virtual void setStartScaleY(float startScaleY);
  
-    virtual void setStartScaleY(float);
+    virtual void setShouldHide(bool shouldHide);
  
-    virtual void setShouldHide(bool);
+    virtual void setEnterEffect(int enterEffect);
  
-    virtual void setEnterEffect(int);
+    virtual void setTintColor(cocos2d::ccColor3B tintColor);
  
-    virtual void setTintColor(cocos2d::ccColor3B);
+    virtual void setTintDuration(float duration);
  
-    virtual void setTintDuration(float);
+    virtual void setObjectKey(int objectKey);
  
-    virtual void setObjectKey(int);
+    virtual void setDontTransform(bool dontTransform);
  
-    virtual void setDontTransform(bool);
+    virtual void setStateVar(bool stateVar);
  
-    virtual void setStateVar(bool);
+    virtual void setObjectZ(int objectZ);
  
-    virtual void setObjectZ(int);
- 
-    virtual void setObjectParent(cocos2d::CCNode*);
+    virtual void setObjectParent(cocos2d::CCNode* objectParent);
+    
+    
+    cocos2d::CCSprite *m_glowSprite;
+    bool m_isTriggerObject;
+    bool m_maybeRegisterStateObject;
+    bool m_powerOnOffObject;
+
+    float m_objectRectWidth;
+    float m_objectRectHeight;
+    bool m_activateObject;
+    bool m_maybeIsInGame;
+
+    cocos2d::CCParticleSystemQuad *m_particleSystem;
+
+    // I don't know what this Position is or Does or is meant to be yet...
+    cocos2d::CCPoint m_unkPos;
+
+    float m_scaleModX;
+    float m_scaleModY;
+    int m_M_ID;
+    int m_type;
+    int m_sectionIDX;
+    bool m_shouldSpawn;
+
+
+    // It is worth Noting that in this version of the game CCPoint 
+    // is a subclass of CCObject and so is CCSize and CCRect bigger 
+    // and bulkier than they should be.
+    // Thank robtop that he fixes this cancer in a future version
+
+    cocos2d::CCPoint m_startPos;
+    
+    gd::string m_frame;
+    bool m_blendAddative;
+    bool m_usePlayerColor;
+    bool m_isDisabled;
+    float m_startRotation;
+    float m_startScaleX;
+    float m_startScaleY;
+    bool m_shouldHide;
+    float m_spawnXPos;
+    bool m_isInvisible;
+    int m_enterEffect;
+    cocos2d::ccColor3B m_tintColor;
+    float m_tintDuration;
+    int m_objectKey;
+    bool m_dontTransform;
+    bool m_hasBeenActivated;
+    bool m_stateVar;
+    int m_objectZ;
+    cocos2d::CCNode *m_objectParent;
 
 }
 
