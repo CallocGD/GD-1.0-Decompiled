@@ -12,3 +12,6 @@ has long term benefits overall.
 - I do not condone piracy of the game however I do believe in being able to recompile the game when it's been fully decompiled.
 This is why I am not handing out game assets. If you want those, buy the game.
 
+## Current Tasks
+- [pending...] find all Class members and name them all off 100% (excluding cocos2d stuff and other unimportant things) 
+- [] write C++ code when all class members have been found and named off.... 
