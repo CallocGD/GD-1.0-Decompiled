@@ -26,7 +26,7 @@ class FontObject {
 // Class Memebers 100% Complete for GameObject except for one named m_unkPos 
 
 [[link(android)]]
-class GameObject : cocos2d::CCSprite {
+class GameObject : CCSprite {
     // GameObject();
     virtual ~GameObject();
  
@@ -35,15 +35,13 @@ class GameObject : cocos2d::CCSprite {
     void addGlow();
     cocos2d::CCParticleSystemQuad* createAndAddParticle(char const* frame, int maybeParticleID);
     
-    // Unknown Return Type For now, Ghidra did not decompile this function I wanted correctly... 
     TodoReturn createObject(char const* frame);
 
-    // Same Problem, Ghidra did not decompile this function I wanted correctly... 
-    TodoReturn customScaleMod(char const* unkStr);
-    void customSetup();
 
-    // Same Problem no need to explain futher 
-    TodoReturn frameToKey(char const* frame);
+    GameObject* customScaleMod(char const* unkStr);
+    void customSetup();
+    
+    char* frameToKey(char const* frame);
     
     char* getBallFrame(int ID);
     bool getBlendAdditive();
@@ -78,20 +76,17 @@ class GameObject : cocos2d::CCSprite {
     bool init(char const* frame);
     char* keyToFrame(char const* key);
 
-    // Same Problem as described. Ghidra cuts out too early. 
-    // However anyone with a brain should be able to identify 
-    // this one pretty quickly.
+
     static GameObject* objectFromString(gd::string str);
 
     void removeGlow();
     void setObjectColor(cocos2d::ccColor3B objectColor);
     
-    // function cuts on ghidra where it shouldn't , so I can't find the returnType at the moment...
 
-    TodoReturn setupTypeFromFrame(char const* frame);
+    void setupTypeFromFrame(char const* frame);
 
     cocos2d::CCDictionary* stringSetupToDict(gd::string);
-    TodoReturn updateState();
+    void updateState();
  
     virtual TodoReturn update(float);
  
@@ -125,7 +120,6 @@ class GameObject : cocos2d::CCSprite {
  
     virtual void setStartPos(cocos2d::CCPoint startPos);
     
-    // Maybe gd::string , on ghidra it cuts at 001c9e62 when it should really end at 001ca3b4
     virtual gd::string getSaveString();
  
     virtual void setFlipX(bool flipX);
@@ -199,9 +193,8 @@ class GameObject : cocos2d::CCSprite {
 
 
     // It is worth Noting that in this version of the game CCPoint 
-    // is a subclass of CCObject and so is CCSize and CCRect bigger 
-    // and bulkier than they should be.
-    // Thank robtop that he fixes this cancer in a future version
+    // is a subclass of CCObject and so is CCSize and CCRect
+    // and believe me, it's cancer.
 
     cocos2d::CCPoint m_startPos;
     
